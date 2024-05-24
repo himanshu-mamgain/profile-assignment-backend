@@ -122,8 +122,20 @@ export const uploadPhoto = async (req: any, res: any) => {
           .exec();
 
         if (!profile) {
-          res.status(404).send({
-            message: "Profile not found.",
+          const newProfile = new profileModel({
+            photo: {
+              data: file.buffer,
+              contentType: file.mimetype,
+              name: file.originalname,
+              size: file.size,
+            },
+            userId: req.user._id,
+          });
+
+          await newProfile.save();
+
+          res.status(200).send({
+            message: "Image uploaded successfully!",
           });
           return;
         }
