@@ -1,0 +1,23 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const auth_1 = require("../utils/auth");
+const profile_controller_1 = require("../controllers/profile.controller");
+const profileRoute = (router) => {
+    router.get("/profile", auth_1.auth, profile_controller_1.getUserProfile);
+    router.post("/update-basic-details", auth_1.auth, profile_controller_1.updateBasicDetails);
+    router.post("/upload-photo", auth_1.auth, profile_controller_1.uploadPhoto);
+    router.get("/profile-photo/:userId", profile_controller_1.profilePhoto);
+    router.get("/skill-profile", auth_1.auth, profile_controller_1.getSkillProfile);
+    router.get("/profile-details", auth_1.auth, profile_controller_1.profileDetails);
+    router.post("/add-skills", auth_1.auth, profile_controller_1.addSkills);
+    router.post("/delete-skill", auth_1.auth, profile_controller_1.deleteSkill);
+    router.post("/add-education", auth_1.auth, profile_controller_1.addEducation);
+    router.post("/delete-education/:educationId", auth_1.auth, profile_controller_1.deleteEducation);
+    router.post("/update-education/:educationId", auth_1.auth, profile_controller_1.updateEducation);
+    router.post("/add-experience", auth_1.auth, profile_controller_1.addExperience);
+    router.post("/delete-experience/:experienceId", auth_1.auth, profile_controller_1.deleteExperience);
+    router.post("/update-experience/:experienceId", auth_1.auth, profile_controller_1.updateExperience);
+    router.get("/education-details/:educationId", auth_1.auth, profile_controller_1.getEducationDetails);
+    router.get("/experience-details/:experienceId", auth_1.auth, profile_controller_1.getExperienceDetails);
+};
+exports.default = profileRoute;
