@@ -78,5 +78,4 @@ export const emailTemplate = (otp: number): string => {
     </body>
     </html>
   `;
-
 }

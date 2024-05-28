@@ -82,6 +82,6 @@ export const createToken = (tokenPayload: TokenData): string => {
 
     throw new Error("Secret key is missing!");
   } catch (err: any) {
-    throw new Error(err.message);
+    return err?.message;
   }
 };
