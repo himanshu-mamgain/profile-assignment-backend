@@ -9,7 +9,7 @@ export const mongoDBConnection = () => {
 
       const db = mongoose.connection;
 
-      db.on("error", (error) => console.log(error.message));
+      db.on("error", (err) => console.error(err.message));
 
       db.once("connected", (connected) =>
         console.log("Successfully connected to database!")
