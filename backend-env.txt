@@ -1,0 +1,13 @@
+# Environment setup
+NODE_ENV=development
+
+# DATABASE CONNECTION URL
+DATABASE_URL=mongodb+srv://admin-himanshu:Test123@cluster0.j2qen.mongodb.net/profileDB
+
+# SECRET KEY (JWT)
+SECRET_KEY=adaan_digital_solutions
+
+# NODEMAILER CREDENTIALS
+MAIL_SERVICE=gmail
+USER=himanshum50360@gmail.com
+PASS=nzvgbnnywutunnmf

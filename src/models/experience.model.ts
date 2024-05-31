@@ -19,7 +19,7 @@ const experienceSchema = new mongoose.Schema({
   },
   userId: {
     type: Schema.Types.ObjectId,
-    ref: "User",
+    ref: "userId",
     required: true
   }
 });

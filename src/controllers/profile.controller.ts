@@ -3,14 +3,10 @@ import educationModel from "../models/education.model";
 import experienceModel from "../models/experience.model";
 import profileModel from "../models/profile.model";
 import userModel from "../models/user.model";
-import { errorMonitor } from "nodemailer/lib/xoauth2";
 
 export const getUserProfile = async (req: any, res: any) => {
   try {
-    const userProfile = await userModel
-      .findById(req.user._id)
-      .select("name email phone");
-
+    const userProfile = await userModel.findById(req.user._id);
     res.status(200).send({
       message: "Profile fetched successfully",
       profileData: userProfile,

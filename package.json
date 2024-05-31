@@ -7,7 +7,7 @@
     "start": "node ./dist/index.js",
     "watch": "tsc --build && nodemon ./dist/index.js",
     "dev": "ts-node ./src/index.ts",
-    "dev:watch": "nodemon --watch ./src -e ts --exec \"npm run start\"",
+    "dev:watch": "nodemon --watch ./src -e ts --exec \"npm run dev\"",
     "build": "tsc --build",
     "test": "jest"
   },

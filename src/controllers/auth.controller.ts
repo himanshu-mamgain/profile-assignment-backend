@@ -97,7 +97,7 @@ export const loginUser = async (req: any, res: any) => {
             res.status(200).send({
               message: "User logged in successfully!",
               accessToken: token,
-              userId: user._id
+              userId: user._id,
             });
           } else {
             res.status(401).send({

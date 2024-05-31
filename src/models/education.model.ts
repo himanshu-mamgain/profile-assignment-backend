@@ -23,9 +23,9 @@ const educationSchema = new mongoose.Schema({
   },
   userId: {
     type: Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
-  },
+    ref: "userId",
+    required: true
+  }
 });
 
 export = mongoose.model("Education", educationSchema);

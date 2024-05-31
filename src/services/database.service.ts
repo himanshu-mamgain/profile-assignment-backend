@@ -9,9 +9,9 @@ export const mongoDBConnection = () => {
 
       const db = mongoose.connection;
 
-      db.on("error", (err) => console.error(err.message));
+      db.on("error", (err: any) => console.error(err?.message));
 
-      db.once("connected", (connected) =>
+      db.once("connected", () =>
         console.log("Successfully connected to database!")
       );
 
@@ -20,6 +20,6 @@ export const mongoDBConnection = () => {
 
     throw new Error("Database connection url is missing!");
   } catch (err: any) {
-    throw new Error(err?.message);
+    console.error(err?.message);
   }
 };
