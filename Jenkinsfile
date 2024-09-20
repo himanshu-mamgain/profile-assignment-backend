@@ -18,5 +18,11 @@ pipeline {
                 echo 'deploying the application...'
             }
         }
+
+        stage("checkout") {
+            steps {
+                echo 'checkout the application...'
+            }
+        }
     }
 }
