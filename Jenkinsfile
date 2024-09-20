@@ -4,12 +4,17 @@ pipeline {
         stage("build") {
             steps {
                 echo 'building the application...'
+                echo 'executing yarn...'
+                nodejs('Node-22.9') {
+                    sh 'yarn install'
+                }
             }
         }
 
         stage("test") {
             steps {
                 echo 'testing the application...'
+                
             }
         }
 
