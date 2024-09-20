@@ -1,0 +1,37 @@
+version: '3'
+services: 
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+    volumes:
+      - profile-data:/data/db
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=${ME_CONFIG_MONGODB_ADMINUSERNAME}
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=${ME_CONFIG_MONGODB_ADMINPASSWORD}
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+    depends_on:
+      - mongodb
+  profile:
+    image: 008971675228.dkr.ecr.us-east-1.amazonaws.com/profile:latest
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_ENV=development 
+      - DATABASE_URL=${DATABASE_URL}
+      - SECRET_KEY=${SECRET_KEY}
+      - MAIL_SERVICE=${MAIL_SERVICE}
+      - USER=${USER}
+      - PASS=${PASS}
+    depends_on:
+      - mongodb
+volumes:
+  profile-data:
+    driver: local

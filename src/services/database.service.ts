@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export const mongoDBConnection = () => {
-  const dbConnUrl: string | undefined = process.env.DATABASE_URL;
+  const dbConnUrl: string = process.env.DATABASE_URL!;
 
   try {
     if (dbConnUrl) {
