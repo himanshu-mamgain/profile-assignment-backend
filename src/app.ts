@@ -1,9 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import authRoute from "./routes/auth.route";
-import profileRoute from "./routes/profile.route";
-import pingRoute from "./routes/ping.route";
+import routes from "./routes";
 
 const app = express();
 
@@ -16,8 +14,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // route setup
-authRoute(app.use(express.Router()));
-profileRoute(app.use(express.Router()));
-pingRoute(app.use(express.Router()));
+routes(app.use(express.Router()));
 
 export default app;
