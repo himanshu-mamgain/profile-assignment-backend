@@ -8,13 +8,6 @@ pipeline {
     }
 
     stages {
-        stage("Run Process in Background") {
-            steps {
-                // Using PowerShell to run the process in the background on Windows
-                powershell 'Start-Process -NoNewWindow -FilePath "java" -ArgumentList "-jar myapp.jar"'
-            }
-        }
-
         stage("Clean Workspace") {
             steps {
                 deleteDir()
