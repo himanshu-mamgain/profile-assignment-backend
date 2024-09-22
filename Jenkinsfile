@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        agent { dockerfile true }
+        agent {  docker { image 'docker' } }
     }
 
     environment {
