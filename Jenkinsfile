@@ -4,7 +4,7 @@ pipeline {
     environment {
         AWS_REGION = 'us-east-1'
         ECR_REPO = '008971675228.dkr.ecr.us-east-1.amazonaws.com/profile'
-        AWS_CREDENTIALS_ID = 'aws-credentials'
+        AWS_CREDENTIALS_ID = 'aws-creds'
     }
 
     stages {
@@ -16,7 +16,7 @@ pipeline {
 
         stage("Clone Github Repository") {
             steps {
-                git branch: 'master', credentialsId: "global", url: 'https://github.com/himanshu-mamgain/profile-assignment-backend.git'
+                git branch: 'master', credentialsId: "github-creds", url: 'https://github.com/himanshu-mamgain/profile-assignment-backend.git'
                 sh 'sudo chmod -R 777 /var/lib/jenkins/workspace/*'
             }
         }
@@ -25,7 +25,7 @@ pipeline {
             steps {
                 checkout scmGit(
                     branches: [[name: '*/master']],
-                    userRemoteConfigs: [[credentialsId: 'global', url: 'https://github.com/himanshu-mamgain/profile-assignment-backend.git']]
+                    userRemoteConfigs: [[credentialsId: 'github-creds', url: 'https://github.com/himanshu-mamgain/profile-assignment-backend.git']]
                 )
             }
         }
