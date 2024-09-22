@@ -17,7 +17,7 @@ pipeline {
         stage("Clone Github Repository") {
             steps {
                 git branch: 'master', credentialsId: "github-creds", url: 'https://github.com/himanshu-mamgain/profile-assignment-backend.git'
-                sh 'chmod -R 777 /var/lib/jenkins/workspace/*'
+                sh 'chmod -R 777 /var/jenkins_home/workspace/*'
             }
         }
 
