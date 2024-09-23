@@ -17,7 +17,6 @@ pipeline {
         stage("Clone Github Repository") {
             steps {
                 git branch: 'master', credentialsId: "github-creds", url: 'https://github.com/himanshu-mamgain/profile-assignment-backend.git'
-                // sh 'chmod -R 777 /var/jenkins_home/workspace/*'
             }
         }
 
@@ -35,7 +34,7 @@ pipeline {
                 script {
                     sh "docker build --no-cache -t profile ."
                     echo "$JOB_NAME:v1.$BUILD_ID"
-                    sh "docker tag profile:latest 008971675228.dkr.ecr.us-east-1.amazonaws.com/profile:latest"
+                    sh "docker tag profile:latest ${ECR_REPO}:latest"
                 }
             }
         }
@@ -43,10 +42,11 @@ pipeline {
         stage("Push Image to ECR") {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: "${AWS_CREDENTIALS_ID}", passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
-                        sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 008971675228.dkr.ecr.us-east-1.amazonaws.com"
-                        sh "docker push 008971675228.dkr.ecr.us-east-1.amazonaws.com/profile:latest"
-                        sh "docker rmi profile:latest"
+                    // Using AWS credentials for ECR login and push
+                    withAWS(credentials: "${AWS_CREDENTIALS_ID}", region: "${AWS_REGION}") {
+                        sh "aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_REPO}"
+                        sh "docker push ${ECR_REPO}:latest"
+                        sh "docker rmi ${ECR_REPO}:latest"
                         sh "docker system prune -af"
                     }
                 }
